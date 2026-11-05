@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "title": "The Hidden Life of Trees",
+      "author": "Peter Wohlleben",
+      "status": "reading",
+      "note": "Contoh. Ganti dengan bukumu."
+    },
+    {
+      "title": "Man's Search for Meaning",
+      "author": "Viktor E. Frankl",
+      "status": "done",
+      "note": "Contoh. Tulis kesan singkat di sini."
+    },
+    {
+      "title": "Sapiens",
+      "author": "Yuval Noah Harari",
+      "status": "want",
+      "note": "Contoh. Masih antre."
+    }
+  ]
+}

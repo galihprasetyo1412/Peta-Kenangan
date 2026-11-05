@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "type": "Video",
+      "title": "Contoh video YouTube",
+      "desc": "Isi kolom ID YouTube untuk menampilkan pemutar di sini."
+    },
+    {
+      "type": "Dokumentasi",
+      "title": "Contoh dokumentasi kegiatan",
+      "desc": "Cocok untuk tautan ke arsip foto atau laporan kegiatan."
+    }
+  ]
+}

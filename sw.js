@@ -1,5 +1,5 @@
 /* Naikkan angka versi setiap kali Anda mengubah isi situs, agar cache lama diganti. */
-const V = "jurnal-v1";
+const V = "jurnal-v2";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {
@@ -26,6 +26,16 @@ self.addEventListener("fetch", e => {
       fetch(r)
         .then(res => { const cp = res.clone(); caches.open(V).then(c => c.put("./index.html", cp)); return res; })
         .catch(() => caches.match("./index.html"))
+    );
+    return;
+  }
+
+  // Data isi (JSON): internet dulu agar perubahan langsung terlihat, cache sebagai cadangan
+  if (u.pathname.includes("/data/")) {
+    e.respondWith(
+      fetch(r)
+        .then(res => { const cp = res.clone(); caches.open(V).then(c => c.put(r, cp)); return res; })
+        .catch(() => caches.match(r))
     );
     return;
   }
