@@ -244,10 +244,14 @@ async function loadData() {
   [POSTS, NOTES, GALLERY, MEDIA, BOOKS] = await Promise.all(["posts","notes","gallery","media","books"].map(get));
   POSTS = POSTS.filter(p => p.title && p.body).map(p => ({ ...p, slug: p.slug || slugify(p.title), tags: p.tags || [], date: p.date || "2000-01-01" }));
   NOTES = NOTES.filter(n => n.text).map(n => ({ ...n, date: n.date || "2000-01-01" }));
-  POSTS.sort(byDate); NOTES.sort(byDate);
   BOOKS = BOOKS.filter(b => b.title).map(b => ({ ...b, status: BOOK_STAMP[b.status] ? b.status : "want" }));
   GALLERY = GALLERY.filter(g => g.caption || imgSrc(g));
   MEDIA = MEDIA.filter(m => m.title);
+  /* Urutan tampil: terbaru di atas. Yang bertanggal diurutkan menurut tanggal.
+     Yang tanpa tanggal atau bertanggal sama: yang paling akhir ditambahkan tampil lebih dulu. */
+  const newest = list => list.map((x, i) => ({ ...x, _i: i }))
+    .sort((a, b) => (b.date || "").localeCompare(a.date || "") || b._i - a._i);
+  POSTS = newest(POSTS); NOTES = newest(NOTES); GALLERY = newest(GALLERY); MEDIA = newest(MEDIA); BOOKS = newest(BOOKS);
 }
 
 const $ = s => document.querySelector(s);
