@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#2F5D45"/>
+  <g transform="rotate(-6 256 256)">
+    <rect x="116" y="116" width="280" height="280" rx="8" ry="8" fill="#FFD84D"/>
+    <rect x="216" y="92" width="80" height="30" fill="#ffffff" opacity=".6" transform="rotate(-3 256 107)"/>
+    <text x="256" y="320" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="190" fill="#1D2B23">G</text>
+  </g>
+</svg>

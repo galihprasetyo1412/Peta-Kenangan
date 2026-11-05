@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jurnal Galih</title>
+<meta name="description" content="Jurnal pribadi, gagasan, dan portofolio profesional dalam satu tempat.">
+<meta name="theme-color" content="#2F5D45" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141C17" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Jurnal Galih">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EAF0E4; --grid:#D5DFCD; --ink:#1D2B23; --muted:#56665B;
+  --moss:#2F5D45; --on-moss:#fff; --line:rgba(29,43,35,.28);
+  --yellow:#FFD84D; --mint:#BFE5CF; --sky:#A9D4F0; --pink:#FFBDB2; --stamp:#D9432E;
+  --note-ink:#1D2B23;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#141C17; --grid:#1D2922; --ink:#E9F0E6; --muted:#9AAA9F;
+    --moss:#8AD1A7; --on-moss:#102016; --line:rgba(233,240,230,.28); --stamp:#FF7A63;}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background-color:var(--paper); color:var(--ink);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  font-family:var(--serif); font-size:1.125rem; line-height:1.7;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+a{color:inherit; text-decoration-color:var(--moss); text-decoration-thickness:2px; text-underline-offset:3px}
+a:hover{background:var(--yellow); color:var(--note-ink)}
+:focus-visible{outline:3px solid var(--moss); outline-offset:3px; border-radius:4px}
+.skip{position:absolute; left:-999px; top:0; background:var(--ink); color:var(--paper); padding:.5rem 1rem; z-index:50}
+.skip:focus{left:.5rem; top:.5rem}
+
+/* Kepala dan navigasi */
+.top{max-width:68rem; margin:0 auto; padding:1.1rem 1rem .5rem}
+.brand{font-family:var(--sans); font-weight:800; font-size:1.7rem; letter-spacing:-.02em; text-decoration:none; line-height:1.1}
+.brand:hover{background:none}
+.tag{margin:.15rem 0 0; color:var(--muted); font-style:italic; font-size:1rem; line-height:1.4}
+.nav{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--paper) 92%,transparent); backdrop-filter:blur(6px); border-bottom:2px dashed var(--line)}
+.nav ul{list-style:none; margin:0 auto; padding:.55rem 1rem; max-width:68rem; display:flex; gap:.4rem; overflow-x:auto; scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a{display:block; white-space:nowrap; font-family:var(--sans); font-weight:700; font-size:.95rem; padding:.3rem .85rem; border-radius:999px; border:2px solid transparent; text-decoration:none}
+.nav a:hover{background:var(--yellow); color:var(--note-ink)}
+.nav a[aria-current="page"]{background:var(--ink); color:var(--paper)}
+
+/* Isi */
+main{max-width:42rem; margin:0 auto; padding:1.5rem 1rem 3rem; outline:none}
+main.wide{max-width:68rem}
+h1,h2,h3{font-family:var(--sans); line-height:1.15; letter-spacing:-.015em; margin:0}
+h1{font-size:clamp(2.3rem,8vw,3.7rem); font-weight:800; letter-spacing:-.03em; margin-bottom:1rem}
+h2{font-size:1.7rem; font-weight:800; margin:2.6rem 0 .9rem}
+h3{font-size:1.3rem; font-weight:700; margin:1.8rem 0 .4rem}
+p{margin:0 0 1.1em}
+.lead{font-size:1.3rem; line-height:1.6}
+.meta{color:var(--muted); font-size:.95rem; margin:.15rem 0 .5rem}
+.page-intro{color:var(--muted); font-size:1.1rem; margin-bottom:1.8rem}
+.btn{display:inline-block; font-family:var(--sans); font-weight:700; font-size:.95rem; padding:.45rem 1rem; border:2px solid var(--ink); border-radius:10px; background:transparent; color:var(--ink); cursor:pointer; text-decoration:none}
+.btn:hover{background:var(--yellow); color:var(--note-ink)}
+.btn[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+
+/* Daftar tulisan */
+.entry{padding:1.1rem 0; border-bottom:2px dashed var(--line)}
+.entry:last-of-type{border-bottom:0}
+.entry h2,.entry h3{margin:0}
+.entry h2 a,.entry h3 a{text-decoration:none}
+.entry h2{font-size:1.6rem}
+.entry h3{font-size:1.45rem}
+.entry p{margin:0}
+.tags{color:var(--muted); font-size:.95rem; font-style:italic}
+.post h1{margin-bottom:.4rem}
+.post .body{margin-top:1.6rem}
+.post .body h3{margin-top:2rem}
+.back{display:inline-block; margin-top:2rem; font-family:var(--sans); font-weight:700}
+
+/* Sticky notes */
+.wall{display:grid; grid-template-columns:repeat(auto-fill,minmax(14.5rem,1fr)); gap:1.8rem 1.6rem; padding:.8rem .2rem}
+.mini{grid-template-columns:repeat(auto-fill,minmax(12rem,1fr))}
+.note{position:relative; background:var(--c); color:var(--note-ink); padding:1.3rem 1.1rem 1rem; border-radius:2px 2px 16px 2px; box-shadow:0 1px 0 rgba(0,0,0,.15),0 10px 16px -10px rgba(0,0,0,.55); transform:rotate(var(--r)); transition:transform .15s}
+.note::before{content:""; position:absolute; top:-11px; left:50%; width:68px; height:22px; background:rgba(255,255,255,.55); box-shadow:0 1px 2px rgba(0,0,0,.15); transform:translateX(-50%) rotate(-3deg)}
+.note:hover{transform:rotate(0) scale(1.02)}
+.note .nt{font-family:var(--sans); font-weight:500; font-size:1.08rem; line-height:1.4; margin:0 0 .7rem}
+.note .by{margin:-.3rem 0 .7rem; font-style:italic; font-size:.95rem}
+.note .nm{margin:0; font-size:.85rem; line-height:1.3}
+.note .nm span{font-family:var(--sans); font-weight:800; margin-right:.5rem}
+.note.big{max-width:27rem; padding:1.7rem 1.4rem 1.2rem; margin:1.4rem 0 0}
+.note.big .nt{font-size:1.45rem; line-height:1.35}
+.filters{display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.4rem}
+
+/* Galeri polaroid */
+.shots{display:grid; grid-template-columns:repeat(auto-fill,minmax(14rem,1fr)); gap:2rem 1.6rem; padding:.5rem .2rem}
+.polaroid{all:unset; box-sizing:border-box; cursor:pointer; display:block; background:#FBFBF6; color:#1D2B23; padding:.6rem .6rem .2rem; box-shadow:0 1px 0 rgba(0,0,0,.15),0 12px 18px -12px rgba(0,0,0,.6); transform:rotate(var(--r)); transition:transform .15s}
+.polaroid:hover{transform:rotate(0) scale(1.03)}
+.polaroid:focus-visible{outline:3px solid var(--moss); outline-offset:4px}
+.ph{aspect-ratio:1; width:100%; display:block; object-fit:cover; background:repeating-linear-gradient(135deg,#CFE6D6 0 12px,#E3F1E7 12px 24px); display:grid; place-items:center; font-family:var(--sans); font-weight:700; color:#4B6657; font-size:.95rem}
+.polaroid .cap{font-family:var(--sans); font-weight:500; font-size:.95rem; line-height:1.3; padding:.7rem .3rem .9rem}
+dialog{border:0; padding:0; background:transparent; max-width:min(92vw,34rem); width:100%; color:#1D2B23}
+dialog::backdrop{background:rgba(10,16,12,.8)}
+.lb{background:#FBFBF6; padding:.8rem .8rem 1rem; border-radius:3px}
+.lb .ph,.lb img{max-height:70vh}
+.lb p{font-family:var(--sans); margin:.8rem .3rem .6rem}
+
+/* Resume */
+.tl{border-left:3px solid var(--moss); margin:0 0 0 .5rem; padding-left:1.4rem}
+.job{position:relative; padding-bottom:1.6rem}
+.job::before{content:""; position:absolute; left:calc(-1.4rem - 8.5px); top:.55rem; width:14px; height:14px; border-radius:50%; background:var(--paper); border:3px solid var(--moss)}
+.job h3{margin:0}
+.job .org{margin:0; font-weight:600}
+.job ul{margin:.4rem 0 0; padding-left:1.2rem}
+.chips{display:flex; flex-wrap:wrap; gap:.5rem; list-style:none; padding:0; margin:0}
+.chips li{font-family:var(--sans); font-weight:700; font-size:.95rem; border:2px solid var(--ink); padding:.2rem .8rem; border-radius:8px 14px 8px 14px; background:var(--paper)}
+
+/* Media */
+.media-item{padding:1.2rem 0; border-bottom:2px dashed var(--line)}
+.media-item h2{font-size:1.4rem; margin:0}
+.player{aspect-ratio:16/9; width:100%; margin-top:.8rem; border:2px solid var(--ink); border-radius:10px; background:var(--ink); display:grid; place-items:center; overflow:hidden}
+.player iframe{width:100%; height:100%; border:0}
+.play{all:unset; cursor:pointer; width:4.2rem; height:4.2rem; border-radius:50%; background:var(--yellow); display:grid; place-items:center}
+.play::after{content:""; margin-left:.35rem; border-left:1.3rem solid var(--note-ink); border-top:.8rem solid transparent; border-bottom:.8rem solid transparent}
+.play:focus-visible{outline:3px solid var(--paper); outline-offset:4px}
+
+/* Reading list */
+.book{display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; padding:.9rem 0; border-bottom:2px dashed var(--line)}
+.book h3{margin:0; font-size:1.25rem}
+.book p{margin:0}
+.stamp{flex:none; font-family:var(--sans); font-weight:800; font-size:.9rem; color:var(--stamp); border:2px solid var(--stamp); border-radius:6px; padding:.1rem .6rem; transform:rotate(-4deg); margin-top:.2rem}
+.stamp.done{color:var(--moss)}
+
+/* Kaki halaman */
+footer{max-width:42rem; margin:0 auto; padding:1rem 1rem 3rem; color:var(--muted); font-size:.95rem; border-top:2px dashed var(--line)}
+footer p{margin:0 0 .6rem}
+[hidden]{display:none!important}
+
+@media (prefers-reduced-motion:reduce){.note,.polaroid{transition:none}}
+@media print{
+  .top,.nav,footer,.noprint,.skip{display:none!important}
+  body{background:#fff; color:#000; font-size:11pt}
+  main{max-width:none; padding:0}
+  .job::before{border-color:#000; background:#fff}
+  .tl{border-color:#000}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Langsung ke isi</a>
+<header class="top">
+  <a class="brand" href="#/home" id="brand">Jurnal Galih</a>
+  <p class="tag" id="tagline"></p>
+</header>
+<nav class="nav" aria-label="Menu utama"><ul id="menu"></ul></nav>
+<main id="main" tabindex="-1"></main>
+<dialog id="lb" aria-label="Foto"><div class="lb" id="lbbody"></div></dialog>
+<footer>
+  <p>Situs ini bisa dibuka tanpa internet setelah pernah dikunjungi satu kali.</p>
+  <p id="ios" hidden>Di iPhone: ketuk tombol Bagikan, lalu pilih Tambah ke Layar Utama.</p>
+  <button class="btn" id="install" hidden>Pasang di layar utama</button>
+</footer>
+
+<script>
+/* =====================================================================
+   ISI SITUS. Ubah bagian ini saja untuk mengganti konten.
+   Semua teks di bawah adalah contoh; ganti dengan milik Anda.
+   ===================================================================== */
+const SITE = {
+  first: "Galih",
+  name: "Jurnal Galih",
+  tagline: "Catatan, gagasan, dan portofolio, semuanya numpang di satu rumah.",
+  intro: "Selamat datang di buku catatan saya. Isinya campur aduk: tulisan serius soal hukum dan hutan, pikiran yang lewat begitu saja, dan sesekali kelakuan lucu di rumah. Silakan duduk, ambil minum, baca mana yang menarik."
+};
+
+/* Tulisan panjang. Pisahkan paragraf dengan baris kosong.
+   Awali baris dengan "## " untuk membuat subjudul. */
+const POSTS = [
+  { slug:"kenapa-jurnal-ini", title:"Kenapa saya membuat jurnal ini", date:"2026-11-05", tags:["Hidup"],
+    body:`Selama ini saya menyimpan banyak hal di tempat yang berbeda. CV di satu folder, tulisan di catatan ponsel, foto di galeri yang tidak pernah dirapikan, dan gagasan setengah jadi di kertas yang entah di mana.
+
+Lalu saya sadar, semua itu sebenarnya satu orang yang sama. Orang yang pagi hari mengurus pekerjaan, siang hari membaca pasal, dan malam hari tertawa melihat kelakuan orang rumah.
+
+## Satu rumah untuk semuanya
+
+Jurnal ini adalah usaha untuk menaruh semuanya di satu tempat. Tidak perlu memisahkan yang profesional dari yang personal. Tulisan analisis boleh bersebelahan dengan catatan lucu soal remote TV yang hilang.
+
+Kalau ada yang tersesat dari satu halaman ke halaman lain, anggap saja itu bagian dari tamasya.` },
+  { slug:"batas-dari-patok-sampai-pasal", title:"Batas: dari patok hutan sampai pasal", date:"2026-11-01", tags:["Hukum","Kehutanan"],
+    body:`Di lapangan, batas kawasan hutan adalah patok. Di ruang sidang, batas perbuatan adalah pasal. Keduanya sama-sama garis yang harus disepakati banyak orang agar berfungsi.
+
+Patok yang dicabut atau digeser membuat garis kehilangan makna. Pasal yang tidak dipahami atau dianggap jauh dari kehidupan sehari-hari juga begitu.
+
+## Garis saja tidak cukup
+
+Garis yang baik butuh dua hal. Pertama, jelas: orang tahu persis di mana ia berdiri. Kedua, diakui: orang percaya garis itu ditarik dengan alasan yang masuk akal.
+
+Tulisan ini hanyalah contoh pembuka. Ganti dengan analisis Anda sendiri.` }
+];
+
+/* Catatan pendek. type: quote, ide, harian, atau keluarga. */
+const NOTES = [
+  { type:"keluarga", date:"2026-11-04", text:"Pengumuman resmi dari ruang tamu: remote TV kini berstatus barang bukti yang hilang. Pemeriksaan sofa sedang berlangsung." },
+  { type:"harian",   date:"2026-11-03", text:"Hujan seharian. Teh habis, buku belum selesai, tapi tidak apa-apa." },
+  { type:"ide",      date:"2026-11-02", text:"Tulis soal kenapa aturan yang bagus di kertas sering terasa jauh dari lapangan." },
+  { type:"quote",    date:"2026-10-30", text:"Kita sering bilang \"nanti saja\", padahal hari ini satu-satunya yang pasti.", by:"catatan sendiri" },
+  { type:"keluarga", date:"2026-10-28", text:"Penghuni rumah mengaku \"cuma mau lihat\" isi kulkas. Sudah lima belas menit." },
+  { type:"ide",      date:"2026-10-25", text:"Kebun kecil di belakang rumah, anggap saja laboratorium mini." }
+];
+
+/* Foto. Isi "src" dengan alamat gambar, misalnya "img/pagi.jpg". Tanpa src, tampil kotak penanda. */
+const GALLERY = [
+  { src:"", caption:"Jalan setapak, pagi hari" },
+  { src:"", caption:"Kopi sebelum berangkat" },
+  { src:"", caption:"Karya krayon edisi keluarga" },
+  { src:"", caption:"Awan yang kelihatan seperti kucing" },
+  { src:"", caption:"Sepatu lapangan, korban lumpur" },
+  { src:"", caption:"Meja kerja, versi jujur" }
+];
+
+/* Media. Isi "youtube" dengan ID video (bagian sesudah v= pada alamat), atau "link" untuk tautan biasa. */
+const MEDIA = [
+  { type:"Video", title:"Contoh video YouTube", desc:"Tempel ID video di bagian youtube untuk menampilkan pemutar di sini.", youtube:"" },
+  { type:"Dokumentasi", title:"Contoh dokumentasi kegiatan", desc:"Cocok untuk tautan ke arsip foto atau laporan kegiatan.", link:"" }
+];
+
+/* Daftar bacaan. status: reading, done, atau want. Buku di bawah hanya contoh. */
+const BOOKS = [
+  { title:"The Hidden Life of Trees", author:"Peter Wohlleben", status:"reading", note:"Contoh. Ganti dengan bukumu." },
+  { title:"Man's Search for Meaning", author:"Viktor E. Frankl", status:"done", note:"Contoh. Tulis kesan singkat di sini." },
+  { title:"Sapiens", author:"Yuval Noah Harari", status:"want", note:"Contoh. Masih antre." }
+];
+
+const ABOUT = {
+  paras:[
+    "Saya Galih, Polisi Kehutanan (Polhut) di Kementerian Kehutanan. Pekerjaan saya sehari-hari bersinggungan dengan hutan dan hukum sekaligus, dua hal yang ternyata punya banyak kesamaan.",
+    "Saya menempuh dua sarjana, Kehutanan dan Hukum. Hasilnya, saya sering melihat satu masalah dari dua arah: apa yang terjadi di lapangan, dan apa yang tertulis di aturan.",
+    "Di luar kerja, saya suka membaca, memotret, dan mencatat hal-hal kecil. Situs ini tempat semuanya tinggal. Ganti paragraf ini dengan cerita Anda sendiri."
+  ],
+  facts:[
+    ["Pekerjaan","Polisi Kehutanan (Polhut), Kementerian Kehutanan"],
+    ["Pendidikan","S1 Kehutanan dan S1 Hukum"],
+    ["Tinggal di","Indonesia"],
+    ["Sedang suka","Isi sendiri"]
+  ]
+};
+
+const RESUME = {
+  edu:[
+    { title:"Sarjana Hukum (S.H.)", org:"[Nama universitas]", period:"[Tahun]" },
+    { title:"Sarjana Kehutanan (S.Hut.)", org:"[Nama universitas]", period:"[Tahun]" }
+  ],
+  work:[
+    { title:"Polisi Kehutanan (Polhut)", org:"Kementerian Kehutanan Republik Indonesia", period:"[Tahun] sampai sekarang",
+      points:["Perlindungan dan pengamanan kawasan hutan.","Tambahkan tugas dan capaian Anda di sini."] }
+  ],
+  exp:[
+    { title:"[Judul pengalaman atau proyek]", org:"[Instansi atau komunitas]", period:"[Tahun]", points:["Uraikan peran dan hasilnya."] }
+  ],
+  skills:["Penegakan hukum kehutanan","Analisis peraturan","Penulisan analitis","Patroli dan pengamanan kawasan"]
+};
+
+/* =====================================================================
+   MESIN SITUS. Tidak perlu diubah kecuali ingin mengubah perilakunya.
+   ===================================================================== */
+const NAV = [["home","Home"],["about","About Me"],["resume","Resume"],["journal","Journal"],["notes","Notes"],["gallery","Gallery"],["media","Media"],["reading","Reading List"]];
+const WIDE = new Set(["notes","gallery"]);
+const TYPES = { quote:["Quote","var(--yellow)"], ide:["Ide","var(--mint)"], harian:["Harian","var(--sky)"], keluarga:["Keluarga","var(--pink)"] };
+const ROT = [-1.8,1.4,-.8,2,-1.3,.9];
+const byDate = (a,b) => b.date.localeCompare(a.date);
+POSTS.sort(byDate); NOTES.sort(byDate);
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = d => new Date(d + "T00:00:00").toLocaleDateString("id-ID", { day:"numeric", month:"long", year:"numeric" });
+const readMin = t => Math.max(1, Math.round(t.split(/\s+/).length / 200));
+const paras = t => t.trim().split(/\n\s*\n/).map(p => p.startsWith("## ") ? `<h3>${esc(p.slice(3))}</h3>` : `<p>${esc(p).replace(/\n/g,"<br>")}</p>`).join("");
+const excerpt = p => { const t = p.body.trim().split(/\n\s*\n/)[0]; return t.length > 160 ? t.slice(0,157).trimEnd() + "..." : t; };
+
+const noteHTML = (n, i, big) => `
+  <article class="note${big ? " big" : ""}" style="--c:${TYPES[n.type][1]};--r:${ROT[i % 6]}deg">
+    <p class="nt">${esc(n.text)}</p>
+    ${n.by ? `<p class="by">${esc(n.by)}</p>` : ""}
+    <p class="nm"><span>${TYPES[n.type][0]}</span><time datetime="${n.date}">${fmt(n.date)}</time></p>
+  </article>`;
+
+const entryHTML = (p, lvl) => `
+  <article class="entry">
+    <h${lvl}><a href="#/journal/${esc(p.slug)}">${esc(p.title)}</a></h${lvl}>
+    <p class="meta">${fmt(p.date)}, ${readMin(p.body)} menit baca</p>
+    <p>${esc(excerpt(p))}</p>
+  </article>`;
+
+let noteFilter = "semua";
+const wallHTML = () => NOTES.filter(n => noteFilter === "semua" || n.type === noteFilter).map((n,i) => noteHTML(n,i)).join("") || "<p>Belum ada catatan di kategori ini.</p>";
+
+const jobHTML = j => `
+  <div class="job"><h3>${esc(j.title)}</h3><p class="org">${esc(j.org)}</p><p class="meta">${esc(j.period)}</p>
+  ${j.points ? `<ul>${j.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}</div>`;
+
+const pages = {
+  home: () => ({ title:"Home", html:`
+    <h1>Halo, saya ${esc(SITE.first)}.</h1>
+    <p class="lead">${esc(SITE.intro)}</p>
+    ${NOTES[0] ? `<h2 style="margin-top:2rem">Catatan hari ini</h2>${noteHTML(NOTES[0],0,true)}` : ""}
+    <h2>Tulisan terbaru</h2>
+    ${POSTS.slice(0,3).map(p => entryHTML(p,3)).join("")}
+    <p><a class="back" style="margin-top:.4rem" href="#/journal">Semua tulisan</a></p>
+    <h2>Catatan lainnya</h2>
+    <div class="wall mini">${NOTES.slice(1,4).map((n,i) => noteHTML(n,i+1)).join("")}</div>
+    <p><a class="back" style="margin-top:.4rem" href="#/notes">Semua catatan</a></p>` }),
+
+  about: () => ({ title:"About Me", html:`
+    <h1>About Me</h1>
+    ${ABOUT.paras.map(p => `<p>${esc(p)}</p>`).join("")}
+    <h2>Sekilas</h2>
+    <dl style="margin:0">${ABOUT.facts.map(([k,v]) => `<div class="entry" style="padding:.7rem 0"><dt class="meta" style="margin:0">${esc(k)}</dt><dd style="margin:0">${esc(v)}</dd></div>`).join("")}</dl>` }),
+
+  resume: () => ({ title:"Resume", html:`
+    <h1>Resume</h1>
+    <p class="noprint"><button class="btn" data-print>Cetak atau simpan sebagai PDF</button></p>
+    <h2>Pendidikan</h2><div class="tl">${RESUME.edu.map(jobHTML).join("")}</div>
+    <h2>Pekerjaan</h2><div class="tl">${RESUME.work.map(jobHTML).join("")}</div>
+    <h2>Pengalaman</h2><div class="tl">${RESUME.exp.map(jobHTML).join("")}</div>
+    <h2>Kompetensi</h2><ul class="chips">${RESUME.skills.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` }),
+
+  journal: arg => {
+    if (arg) {
+      const p = POSTS.find(x => x.slug === arg);
+      if (p) return { title:p.title, html:`
+        <article class="post">
+          <h1>${esc(p.title)}</h1>
+          <p class="meta">${fmt(p.date)}, ${readMin(p.body)} menit baca</p>
+          <p class="tags">${p.tags.map(esc).join(", ")}</p>
+          <div class="body">${paras(p.body)}</div>
+          <a class="back" href="#/journal">Kembali ke Journal</a>
+        </article>` };
+    }
+    return { title:"Journal", html:`
+      <h1>Journal</h1>
+      <p class="page-intro">Tulisan panjang tentang pemikiran, hukum, politik, dan kehidupan.</p>
+      ${POSTS.map(p => entryHTML(p,2)).join("")}` };
+  },
+
+  notes: () => ({ title:"Notes", html:`
+    <h1>Notes</h1>
+    <p class="page-intro">Quote, gagasan singkat, catatan harian, dan laporan dari rumah.</p>
+    <div class="filters" role="group" aria-label="Saring catatan">
+      ${["semua", ...Object.keys(TYPES)].map(k => `<button class="btn" data-filter="${k}" aria-pressed="${k === noteFilter}">${k === "semua" ? "Semua" : TYPES[k][0]}</button>`).join("")}
+    </div>
+    <div class="wall" id="wall">${wallHTML()}</div>` }),
+
+  gallery: () => ({ title:"Gallery", html:`
+    <h1>Gallery</h1>
+    <p class="page-intro">Koleksi foto. Ketuk untuk memperbesar.</p>
+    <div class="shots">${GALLERY.map((g,i) => `
+      <button class="polaroid" data-shot="${i}" style="--r:${ROT[(i+2) % 6]}deg" aria-label="Perbesar: ${esc(g.caption)}">
+        ${g.src ? `<img class="ph" src="${esc(g.src)}" alt="${esc(g.caption)}" loading="lazy">` : `<span class="ph">foto menyusul</span>`}
+        <span class="cap" style="display:block">${esc(g.caption)}</span>
+      </button>`).join("")}</div>` }),
+
+  media: () => ({ title:"Media", html:`
+    <h1>Media</h1>
+    <p class="page-intro">Video dan dokumentasi.</p>
+    ${MEDIA.map(m => `
+      <section class="media-item">
+        <p class="meta" style="margin:0">${esc(m.type)}</p>
+        <h2>${esc(m.title)}</h2>
+        <p style="margin:.3rem 0 0">${esc(m.desc)}</p>
+        ${m.youtube ? `<div class="player"><button class="play" data-yt="${esc(m.youtube)}" data-t="${esc(m.title)}" aria-label="Putar video: ${esc(m.title)}"></button></div>` : ""}
+        ${m.link ? `<p style="margin-top:.8rem"><a class="btn" href="${esc(m.link)}" target="_blank" rel="noopener">Buka</a></p>` : ""}
+      </section>`).join("")}` }),
+
+  reading: () => {
+    const groups = [["reading","Sedang dibaca","Lagi dibaca"],["done","Sudah dibaca","Tamat"],["want","Ingin dibaca","Antre"]];
+    return { title:"Reading List", html:`
+      <h1>Reading List</h1>
+      <p class="page-intro">Buku yang sedang dan sudah dibaca.</p>
+      ${groups.map(([k,label,stamp]) => {
+        const list = BOOKS.filter(b => b.status === k);
+        return list.length ? `<h2>${label}</h2>${list.map(b => `
+          <div class="book"><div><h3>${esc(b.title)}</h3><p class="meta" style="margin:0">${esc(b.author)}</p>${b.note ? `<p>${esc(b.note)}</p>` : ""}</div><span class="stamp${k === "done" ? " done" : ""}">${stamp}</span></div>`).join("")}` : "";
+      }).join("")}` };
+  }
+};
+
+/* Navigasi dan router */
+$("#tagline").textContent = SITE.tagline;
+$("#brand").textContent = SITE.name;
+$("#menu").innerHTML = NAV.map(([k,l]) => `<li><a href="#/${k}" data-nav="${k}">${l}</a></li>`).join("");
+
+function render() {
+  const parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean).map(decodeURIComponent);
+  let page = parts[0] || "home";
+  if (!pages[page]) page = "home";
+  const view = pages[page](parts[1]);
+  const main = $("#main");
+  main.className = WIDE.has(page) ? "wide" : "";
+  main.innerHTML = view.html;
+  document.title = page === "home" ? SITE.name : `${view.title} | ${SITE.name}`;
+  document.querySelectorAll("[data-nav]").forEach(a => {
+    if (a.dataset.nav === page) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+  });
+  const active = document.querySelector('[aria-current="page"]');
+  if (active) active.scrollIntoView({ inline:"center", block:"nearest" });
+  window.scrollTo(0,0);
+  main.focus({ preventScroll:true });
+}
+addEventListener("hashchange", render);
+render();
+
+/* Interaksi */
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-filter],[data-shot],[data-yt],[data-print]");
+  if (!t) return;
+  if (t.dataset.filter) {
+    noteFilter = t.dataset.filter;
+    document.querySelectorAll("[data-filter]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.filter === noteFilter)));
+    $("#wall").innerHTML = wallHTML();
+  } else if (t.dataset.shot !== undefined) {
+    const g = GALLERY[+t.dataset.shot];
+    $("#lbbody").innerHTML = (g.src ? `<img class="ph" src="${esc(g.src)}" alt="${esc(g.caption)}" style="object-fit:contain;aspect-ratio:auto">` : `<span class="ph">foto menyusul</span>`)
+      + `<p>${esc(g.caption)}</p><button class="btn" data-close>Tutup</button>`;
+    $("#lb").showModal();
+  } else if (t.dataset.yt) {
+    t.parentElement.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(t.dataset.yt)}?autoplay=1" title="${esc(t.dataset.t)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  } else if (t.dataset.print !== undefined) {
+    print();
+  }
+});
+$("#lb").addEventListener("click", e => { if (e.target.id === "lb" || e.target.closest("[data-close]")) $("#lb").close(); });
+
+/* PWA */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+}
+let deferred;
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; $("#install").hidden = false; });
+$("#install").addEventListener("click", async () => {
+  if (!deferred) return;
+  deferred.prompt(); await deferred.userChoice; deferred = null; $("#install").hidden = true;
+});
+addEventListener("appinstalled", () => { $("#install").hidden = true; });
+if (/iphone|ipad/i.test(navigator.userAgent) && !navigator.standalone) $("#ios").hidden = false;
+</script>
+</body>
+</html>
