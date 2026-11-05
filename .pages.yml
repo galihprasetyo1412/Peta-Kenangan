@@ -96,3 +96,4 @@ content:
             options:
               values: [reading, done, want]
           - { name: note, label: Catatan singkat, type: text }
+          - { name: image, label: Foto sampul atau foto saat membaca (boleh dikosongkan; disarankan lebar sekitar 600 px), type: image }
