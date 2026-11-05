@@ -1,0 +1,98 @@
+media:
+  input: img
+  output: /img
+
+content:
+  - name: posts
+    label: Journal (artikel panjang)
+    type: file
+    path: data/posts.json
+    format: json
+    fields:
+      - name: items
+        label: Artikel
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Judul, type: string, required: true }
+          - { name: date, label: Tanggal, type: date, required: true }
+          - { name: tags, label: Label, type: string, list: true }
+          - { name: body, label: Isi tulisan (kosongkan satu baris antar paragraf, awali dengan ## untuk subjudul), type: text, required: true }
+          - { name: slug, label: Alamat pendek (boleh dikosongkan), type: string }
+
+  - name: notes
+    label: Notes (catatan pendek)
+    type: file
+    path: data/notes.json
+    format: json
+    fields:
+      - name: items
+        label: Catatan
+        type: object
+        list: true
+        fields:
+          - name: type
+            label: Jenis
+            type: select
+            required: true
+            options:
+              values: [quote, ide, harian, keluarga]
+          - { name: date, label: Tanggal, type: date, required: true }
+          - { name: text, label: Isi catatan, type: text, required: true }
+          - { name: by, label: Sumber (untuk quote, boleh kosong), type: string }
+
+  - name: gallery
+    label: Gallery (foto)
+    type: file
+    path: data/gallery.json
+    format: json
+    fields:
+      - name: items
+        label: Foto
+        type: object
+        list: true
+        fields:
+          - { name: caption, label: Keterangan, type: string, required: true }
+          - { name: image, label: Unggah foto, type: image }
+          - { name: url, label: Atau tautan foto (misalnya dari pCloud), type: string }
+
+  - name: media
+    label: Media (video dan dokumentasi)
+    type: file
+    path: data/media.json
+    format: json
+    fields:
+      - name: items
+        label: Media
+        type: object
+        list: true
+        fields:
+          - name: type
+            label: Jenis
+            type: select
+            options:
+              values: [Video, Dokumentasi]
+          - { name: title, label: Judul, type: string, required: true }
+          - { name: desc, label: Deskripsi, type: text }
+          - { name: youtube, label: ID video YouTube (bagian sesudah v=), type: string }
+          - { name: link, label: Tautan lain, type: string }
+
+  - name: books
+    label: Reading List (buku)
+    type: file
+    path: data/books.json
+    format: json
+    fields:
+      - name: items
+        label: Buku
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Judul, type: string, required: true }
+          - { name: author, label: Penulis, type: string }
+          - name: status
+            label: Status
+            type: select
+            options:
+              values: [reading, done, want]
+          - { name: note, label: Catatan singkat, type: text }
