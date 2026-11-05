@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Jurnal Galih</title>
+<title>Peta Kenangan</title>
 <meta name="description" content="Jurnal pribadi, gagasan, dan portofolio profesional dalam satu tempat.">
 <meta name="theme-color" content="#2F5D45" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141C17" media="(prefers-color-scheme: dark)">
@@ -11,7 +11,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Jurnal Galih">
+<meta name="apple-mobile-web-app-title" content="Peta Kenangan">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
@@ -149,6 +149,7 @@ dialog::backdrop{background:rgba(10,16,12,.8)}
 /* Kaki halaman */
 footer{max-width:42rem; margin:0 auto; padding:1rem 1rem 3rem; color:var(--muted); font-size:.95rem; border-top:2px dashed var(--line)}
 footer p{margin:0 0 .6rem}
+footer:not(:has(> :not([hidden]))){display:none}
 [hidden]{display:none!important}
 
 @media (prefers-reduced-motion:reduce){.note,.polaroid{transition:none}}
@@ -164,14 +165,13 @@ footer p{margin:0 0 .6rem}
 <body>
 <a class="skip" href="#main">Langsung ke isi</a>
 <header class="top">
-  <a class="brand" href="#/home" id="brand">Jurnal Galih</a>
+  <a class="brand" href="#/home" id="brand">Peta Kenangan</a>
   <p class="tag" id="tagline"></p>
 </header>
 <nav class="nav" aria-label="Menu utama"><ul id="menu"></ul></nav>
 <main id="main" tabindex="-1"></main>
 <dialog id="lb" aria-label="Foto"><div class="lb" id="lbbody"></div></dialog>
 <footer>
-  <p>Situs ini bisa dibuka tanpa internet setelah pernah dikunjungi satu kali.</p>
   <p id="ios" hidden>Di iPhone: ketuk tombol Bagikan, lalu pilih Tambah ke Layar Utama.</p>
   <button class="btn" id="install" hidden>Pasang di layar utama</button>
 </footer>
@@ -183,7 +183,7 @@ footer p{margin:0 0 .6rem}
    ===================================================================== */
 const SITE = {
   first: "Galih",
-  name: "Jurnal Galih",
+  name: "Peta Kenangan",
   tagline: "Catatan, gagasan, dan portofolio, semuanya numpang di satu rumah.",
   intro: "Selamat datang di buku catatan saya. Isinya campur aduk: tulisan serius soal hukum dan hutan, pikiran yang lewat begitu saja, dan sesekali kelakuan lucu di rumah. Silakan duduk, ambil minum, baca mana yang menarik."
 };
