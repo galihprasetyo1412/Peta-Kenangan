@@ -84,6 +84,9 @@ content:
           - name: url
             label: "Atau tautan foto (misalnya dari pCloud)"
             type: string
+          - name: date
+            label: "Tanggal (boleh dikosongkan)"
+            type: date
 
   - name: media
     label: "Media (video dan dokumentasi)"
@@ -114,6 +117,9 @@ content:
           - name: link
             label: "Tautan lain"
             type: string
+          - name: date
+            label: "Tanggal (boleh dikosongkan)"
+            type: date
 
   - name: books
     label: "Reading List (buku)"
@@ -144,3 +150,6 @@ content:
           - name: image
             label: "Foto sampul atau foto saat membaca (boleh dikosongkan; disarankan lebar sekitar 600 px)"
             type: image
+          - name: date
+            label: "Tanggal mulai atau selesai baca (boleh dikosongkan)"
+            type: date
