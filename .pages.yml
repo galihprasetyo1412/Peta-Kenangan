@@ -3,6 +3,30 @@ media:
   output: /img
 
 content:
+  - name: site
+    label: "Home (judul, sapaan, dan tema)"
+    type: file
+    path: data/site.json
+    format: json
+    fields:
+      - name: name
+        label: "Nama situs"
+        type: string
+      - name: tagline
+        label: "Tagline (kalimat di bawah nama situs)"
+        type: string
+      - name: heading
+        label: "Sapaan besar di beranda (misalnya Halo, saya Galih.)"
+        type: string
+      - name: intro
+        label: "Kata pengantar di beranda"
+        type: text
+      - name: defaultTheme
+        label: "Tema awal untuk pengunjung baru"
+        type: select
+        options:
+          values: [auto, kertas, hutan, laut, senja, mono]
+
   - name: posts
     label: "Journal (artikel panjang)"
     type: file
@@ -84,6 +108,9 @@ content:
           - name: url
             label: "Atau tautan foto (misalnya dari pCloud)"
             type: string
+          - name: video
+            label: "Tautan video langsung (misalnya dari pCloud; format .mp4). Kosongkan kalau ini foto biasa"
+            type: string
           - name: date
             label: "Tanggal (boleh dikosongkan)"
             type: date
@@ -112,7 +139,10 @@ content:
             label: "Deskripsi"
             type: text
           - name: youtube
-            label: "ID video YouTube (bagian sesudah v=)"
+            label: "Video YouTube: tempel tautan atau ID-nya"
+            type: string
+          - name: video
+            label: "Atau tautan video langsung (misalnya dari pCloud; format .mp4)"
             type: string
           - name: link
             label: "Tautan lain"
