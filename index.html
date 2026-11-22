@@ -216,11 +216,11 @@ const imgSrc = g => g.url || (g.image ? asset(g.image) : "");
 
 async function loadData() {
   const get = async n => {
-    try { const r = await fetch(`data/${n}.json`); if (!r.ok) throw new Error(); return (await r.json()).items || []; }
+    try { const r = await fetch(`data/${n}.json`, { cache: "no-cache" }); if (!r.ok) throw new Error(); return (await r.json()).items || []; }
     catch { return []; }
   };
   [POSTS, NOTES, GALLERY, MEDIA, BOOKS] = await Promise.all(["posts","notes","gallery","media","books"].map(get));
-  const getObj = async n => { try { const r = await fetch(`data/${n}.json`); if (!r.ok) throw new Error(); return await r.json(); } catch { return {}; } };
+  const getObj = async n => { try { const r = await fetch(`data/${n}.json`, { cache: "no-cache" }); if (!r.ok) throw new Error(); return await r.json(); } catch { return {}; } };
   const arr = x => Array.isArray(x) ? x : [];
   const [ab, rs] = await Promise.all([getObj("about"), getObj("resume")]);
   ABOUT = { photo: ab.photo || "", paras: arr(ab.paras).filter(Boolean), facts: arr(ab.facts).filter(f => f && f.label) };
