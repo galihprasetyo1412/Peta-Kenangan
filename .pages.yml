@@ -153,3 +153,93 @@ content:
           - name: date
             label: "Tanggal mulai atau selesai baca (boleh dikosongkan)"
             type: date
+
+  - name: about
+    label: "About Me"
+    type: file
+    path: data/about.json
+    format: json
+    fields:
+      - name: photo
+        label: "Foto profil (boleh dikosongkan)"
+        type: image
+      - name: paras
+        label: "Paragraf cerita (satu kotak untuk satu paragraf)"
+        type: text
+        list: true
+      - name: facts
+        label: "Sekilas (hal personal; pekerjaan dan pendidikan cukup di Resume)"
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: "Judul singkat (misalnya Tinggal di)"
+            type: string
+          - name: value
+            label: "Isi"
+            type: string
+
+  - name: resume
+    label: "Resume"
+    type: file
+    path: data/resume.json
+    format: json
+    fields:
+      - name: edu
+        label: "Pendidikan"
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: "Judul"
+            type: string
+          - name: org
+            label: "Instansi atau tempat"
+            type: string
+          - name: period
+            label: "Periode (misalnya 2019 sampai sekarang)"
+            type: string
+          - name: points
+            label: "Poin tugas atau capaian"
+            type: string
+            list: true
+      - name: work
+        label: "Pekerjaan"
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: "Judul"
+            type: string
+          - name: org
+            label: "Instansi atau tempat"
+            type: string
+          - name: period
+            label: "Periode (misalnya 2019 sampai sekarang)"
+            type: string
+          - name: points
+            label: "Poin tugas atau capaian"
+            type: string
+            list: true
+      - name: exp
+        label: "Pengalaman"
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: "Judul"
+            type: string
+          - name: org
+            label: "Instansi atau tempat"
+            type: string
+          - name: period
+            label: "Periode (misalnya 2019 sampai sekarang)"
+            type: string
+          - name: points
+            label: "Poin tugas atau capaian"
+            type: string
+            list: true
+      - name: skills
+        label: "Kompetensi"
+        type: string
+        list: true
