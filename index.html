@@ -141,6 +141,9 @@ dialog::backdrop{background:rgba(10,16,12,.8)}
 .cover img{display:block; width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:3px 7px 7px 3px; box-shadow:0 1px 0 rgba(0,0,0,.2),3px 5px 9px -4px rgba(0,0,0,.6)}
 .cover:focus-visible{outline:3px solid var(--moss); outline-offset:3px}
 .count{text-align:center}
+.portrait{float:right; width:9.5rem; margin:.3rem 0 1rem 1.2rem; padding:.5rem .5rem 1.6rem; background:#FBFBF6; box-shadow:0 1px 0 rgba(0,0,0,.15),0 12px 18px -12px rgba(0,0,0,.6); transform:rotate(2deg)}
+.portrait img{display:block; width:100%; aspect-ratio:1; object-fit:cover}
+.ab p{white-space:pre-line}
 /* Pertahankan baris baru (Enter) pada teks yang diketik lewat formulir */
 .note .nt,.bk p,.media-item p{white-space:pre-line}
 .book h3{margin:0; font-size:1.25rem}
@@ -180,8 +183,8 @@ footer:not(:has(> :not([hidden]))){display:none}
 
 <script>
 /* =====================================================================
-   ISI TETAP. Profil singkat, About, dan Resume diubah di sini.
-   Artikel, catatan, foto, media, dan buku ada di folder data/.
+   ISI TETAP. Hanya nama situs, tagline, dan sapaan beranda yang diubah di sini.
+   About Me, Resume, artikel, catatan, foto, media, dan buku ada di folder data/.
    ===================================================================== */
 const SITE = {
   first: "Galih",
@@ -195,34 +198,9 @@ const SITE = {
    Isi lewat Pages CMS, atau edit file-file itu langsung. */
 let POSTS = [], NOTES = [], GALLERY = [], MEDIA = [], BOOKS = [];
 
-const ABOUT = {
-  paras:[
-    "Saya Galih, Polisi Kehutanan (Polhut) di Kementerian Kehutanan. Pekerjaan saya sehari-hari bersinggungan dengan hutan dan hukum sekaligus, dua hal yang ternyata punya banyak kesamaan.",
-    "Saya menempuh dua sarjana, Kehutanan dan Hukum. Hasilnya, saya sering melihat satu masalah dari dua arah: apa yang terjadi di lapangan, dan apa yang tertulis di aturan.",
-    "Di luar kerja, saya suka membaca, memotret, dan mencatat hal-hal kecil. Situs ini tempat semuanya tinggal. Ganti paragraf ini dengan cerita Anda sendiri."
-  ],
-  facts:[
-    ["Pekerjaan","Polisi Kehutanan (Polhut), Kementerian Kehutanan"],
-    ["Pendidikan","S1 Kehutanan dan S1 Hukum"],
-    ["Tinggal di","Indonesia"],
-    ["Sedang suka","Isi sendiri"]
-  ]
-};
-
-const RESUME = {
-  edu:[
-    { title:"Sarjana Hukum (S.H.)", org:"[Nama universitas]", period:"[Tahun]" },
-    { title:"Sarjana Kehutanan (S.Hut.)", org:"[Nama universitas]", period:"[Tahun]" }
-  ],
-  work:[
-    { title:"Polisi Kehutanan (Polhut)", org:"Kementerian Kehutanan Republik Indonesia", period:"[Tahun] sampai sekarang",
-      points:["Perlindungan dan pengamanan kawasan hutan.","Tambahkan tugas dan capaian Anda di sini."] }
-  ],
-  exp:[
-    { title:"[Judul pengalaman atau proyek]", org:"[Instansi atau komunitas]", period:"[Tahun]", points:["Uraikan peran dan hasilnya."] }
-  ],
-  skills:["Penegakan hukum kehutanan","Analisis peraturan","Penulisan analitis","Patroli dan pengamanan kawasan"]
-};
+/* About Me dan Resume juga dimuat dari data/about.json dan data/resume.json. */
+let ABOUT = { photo:"", paras:[], facts:[] };
+let RESUME = { edu:[], work:[], exp:[], skills:[] };
 
 /* =====================================================================
    MESIN SITUS. Tidak perlu diubah kecuali ingin mengubah perilakunya.
@@ -242,6 +220,11 @@ async function loadData() {
     catch { return []; }
   };
   [POSTS, NOTES, GALLERY, MEDIA, BOOKS] = await Promise.all(["posts","notes","gallery","media","books"].map(get));
+  const getObj = async n => { try { const r = await fetch(`data/${n}.json`); if (!r.ok) throw new Error(); return await r.json(); } catch { return {}; } };
+  const arr = x => Array.isArray(x) ? x : [];
+  const [ab, rs] = await Promise.all([getObj("about"), getObj("resume")]);
+  ABOUT = { photo: ab.photo || "", paras: arr(ab.paras).filter(Boolean), facts: arr(ab.facts).filter(f => f && f.label) };
+  RESUME = { edu: arr(rs.edu), work: arr(rs.work), exp: arr(rs.exp), skills: arr(rs.skills).filter(Boolean) };
   POSTS = POSTS.filter(p => p.title && p.body).map(p => ({ ...p, slug: p.slug || slugify(p.title), tags: p.tags || [], date: p.date || "2000-01-01" }));
   NOTES = NOTES.filter(n => n.text).map(n => ({ ...n, date: n.date || "2000-01-01" }));
   BOOKS = BOOKS.filter(b => b.title).map(b => ({ ...b, status: BOOK_STAMP[b.status] ? b.status : "want" }));
@@ -279,7 +262,7 @@ let noteFilter = "semua";
 
 const jobHTML = j => `
   <div class="job"><h3>${esc(j.title)}</h3><p class="org">${esc(j.org)}</p><p class="meta">${esc(j.period)}</p>
-  ${j.points ? `<ul>${j.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}</div>`;
+  ${Array.isArray(j.points) && j.points.length ? `<ul>${j.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}</div>`;
 
 /* Jumlah item yang tampil per muat. Angka ini boleh diubah. */
 const STEP = { journal:10, notes:24, gallery:12, media:8, books:12 };
@@ -347,17 +330,20 @@ const pages = {
 
   about: () => ({ title:"About Me", html:`
     <h1>About Me</h1>
-    ${ABOUT.paras.map(p => `<p>${esc(p)}</p>`).join("")}
-    <h2>Sekilas</h2>
-    <dl style="margin:0">${ABOUT.facts.map(([k,v]) => `<div class="entry" style="padding:.7rem 0"><dt class="meta" style="margin:0">${esc(k)}</dt><dd style="margin:0">${esc(v)}</dd></div>`).join("")}</dl>` }),
+    ${ABOUT.photo ? `<figure class="portrait"><img src="${esc(asset(ABOUT.photo))}" alt="Foto profil" loading="lazy" decoding="async"></figure>` : ""}
+    <div class="ab">${ABOUT.paras.map(p => `<p>${esc(p)}</p>`).join("")}</div>
+    ${ABOUT.facts.length ? `<h2 style="clear:both">Sekilas</h2>
+    <dl style="margin:0">${ABOUT.facts.map(f => `<div class="entry" style="padding:.7rem 0"><dt class="meta" style="margin:0">${esc(f.label)}</dt><dd style="margin:0">${esc(f.value)}</dd></div>`).join("")}</dl>` : ""}
+    <p style="clear:both"><a class="back" href="#/resume">Lihat riwayat lengkap di Resume</a></p>` }),
 
-  resume: () => ({ title:"Resume", html:`
-    <h1>Resume</h1>
-    <p class="noprint"><button class="btn" data-print>Cetak atau simpan sebagai PDF</button></p>
-    <h2>Pendidikan</h2><div class="tl">${RESUME.edu.map(jobHTML).join("")}</div>
-    <h2>Pekerjaan</h2><div class="tl">${RESUME.work.map(jobHTML).join("")}</div>
-    <h2>Pengalaman</h2><div class="tl">${RESUME.exp.map(jobHTML).join("")}</div>
-    <h2>Kompetensi</h2><ul class="chips">${RESUME.skills.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` }),
+  resume: () => {
+    const sec = (label, list) => list.length ? `<h2>${label}</h2><div class="tl">${list.map(jobHTML).join("")}</div>` : "";
+    return { title:"Resume", html:`
+      <h1>Resume</h1>
+      <p class="noprint"><button class="btn" data-print>Cetak atau simpan sebagai PDF</button></p>
+      ${sec("Pendidikan", RESUME.edu)}${sec("Pekerjaan", RESUME.work)}${sec("Pengalaman", RESUME.exp)}
+      ${RESUME.skills.length ? `<h2>Kompetensi</h2><ul class="chips">${RESUME.skills.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}` };
+  },
 
   journal: arg => {
     if (arg) {
