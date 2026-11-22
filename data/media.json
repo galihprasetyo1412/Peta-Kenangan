@@ -2,13 +2,15 @@
   "items": [
     {
       "type": "Video",
-      "title": "Contoh video YouTube",
-      "desc": "Isi kolom ID YouTube untuk menampilkan pemutar di sini."
+      "title": "Lamaran - Semarang, 26 Maret 2026",
+      "desc": "<a href=\"https://filedn.com/liYHjVYH5pWLkiLkGx17Plf/Engagement%20Dhafina%20%26%20Galih.mp4\">Engagement Dhafina & Galih.mp4</a>",
+      "date": "2026-03-26"
     },
     {
       "type": "Dokumentasi",
       "title": "Contoh dokumentasi kegiatan",
-      "desc": "Cocok untuk tautan ke arsip foto atau laporan kegiatan."
+      "desc": "Cocok untuk tautan ke arsip foto atau laporan kegiatan.",
+      "date": "2026-11-22"
     }
   ]
 }
