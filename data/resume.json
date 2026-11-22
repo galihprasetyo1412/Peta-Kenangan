@@ -2,40 +2,34 @@
   "edu": [
     {
       "title": "Sarjana Hukum (S.H.)",
-      "org": "[Nama universitas]",
-      "period": "[Tahun]"
+      "org": "Universitas Indonesia Timur"
     },
     {
       "title": "Sarjana Kehutanan (S.Hut.)",
-      "org": "[Nama universitas]",
-      "period": "[Tahun]"
+      "org": "Universitas Hasanuddin"
     }
   ],
   "work": [
     {
       "title": "Polisi Kehutanan (Polhut)",
       "org": "Kementerian Kehutanan Republik Indonesia",
-      "period": "[Tahun] sampai sekarang",
-      "points": [
-        "Perlindungan dan pengamanan kawasan hutan.",
-        "Tambahkan tugas dan capaian Anda di sini."
-      ]
+      "period": "2019 sampai sekarang"
     }
   ],
   "exp": [
     {
-      "title": "[Judul pengalaman atau proyek]",
-      "org": "[Instansi atau komunitas]",
-      "period": "[Tahun]",
+      "title": "Satuan Polisi Kehutanan Reaksi Cepat (SPORC)",
+      "org": "Kementerian Kehutanan Republik Indonesia",
+      "period": "2024 sampai sekarang",
       "points": [
         "Uraikan peran dan hasilnya."
       ]
     }
   ],
   "skills": [
-    "Penegakan hukum kehutanan",
-    "Analisis peraturan",
-    "Penulisan analitis",
-    "Patroli dan pengamanan kawasan"
+    "Perlindungan dan Pengamanan Hutan",
+    "Penegakan Hukum Kehutanan",
+    "Administrasi Teknis",
+    "Analisis Geospasial"
   ]
 }
