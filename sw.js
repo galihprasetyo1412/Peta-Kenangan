@@ -1,5 +1,5 @@
 /* Naikkan angka versi setiap kali Anda mengubah isi situs, agar cache lama diganti. */
-const V = "jurnal-v2";
+const V = "jurnal-v4";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {
@@ -19,6 +19,11 @@ self.addEventListener("fetch", e => {
   if (r.method !== "GET") return;
   const u = new URL(r.url);
   if (u.hostname.includes("youtube")) return; // video selalu butuh internet
+  // Video, audio, dan permintaan Range dibiarkan langsung ke jaringan (tidak disimpan di cache).
+  if (r.destination === "video" || r.destination === "audio" || r.headers.has("range")) return;
+  // Foto galeri tidak disimpan di cache agar penyimpanan pengunjung tidak penuh.
+  // Ikon situs sendiri tetap tersimpan lewat daftar SHELL.
+  if (r.destination === "image" && !SHELL.some(f => u.pathname.endsWith(f.replace("./", "/")))) return;
 
   // Halaman: coba internet dulu, cadangan dari cache
   if (r.mode === "navigate") {

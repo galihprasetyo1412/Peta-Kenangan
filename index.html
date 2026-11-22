@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Peta Kenangan</title>
 <meta name="description" content="Jurnal pribadi, gagasan, dan portofolio profesional dalam satu tempat.">
-<meta name="theme-color" content="#2F5D45" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141C17" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#EAF0E4">
+<script>try{var t=localStorage.getItem("theme");if(t&&t!=="auto")document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -23,12 +23,17 @@
   --note-ink:#1D2B23;
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
   --sans:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
-  color-scheme:light dark;
+  color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
-  :root{--paper:#141C17; --grid:#1D2922; --ink:#E9F0E6; --muted:#9AAA9F;
-    --moss:#8AD1A7; --on-moss:#102016; --line:rgba(233,240,230,.28); --stamp:#FF7A63;}
+  :root:not([data-theme]){color-scheme:dark; --paper:#141C17; --grid:#1D2922; --ink:#E9F0E6; --muted:#9AAA9F;
+    --moss:#8AD1A7; --on-moss:#102016; --line:rgba(233,240,230,.28); --stamp:#FF7A63}
 }
+:root[data-theme="kertas"]{color-scheme:light}
+:root[data-theme="hutan"]{color-scheme:dark; --paper:#141C17; --grid:#1D2922; --ink:#E9F0E6; --muted:#9AAA9F; --moss:#8AD1A7; --on-moss:#102016; --line:rgba(233,240,230,.28); --stamp:#FF7A63}
+:root[data-theme="laut"]{color-scheme:light; --paper:#E6F0F7; --grid:#CFE0EC; --ink:#14283A; --muted:#4C6478; --moss:#1F5F8B; --on-moss:#fff; --line:rgba(20,40,58,.28); --stamp:#D9432E}
+:root[data-theme="senja"]{color-scheme:dark; --paper:#1E1A2B; --grid:#2A2540; --ink:#F1ECFA; --muted:#A9A0C2; --moss:#F4A6C0; --on-moss:#2A1020; --line:rgba(241,236,250,.28); --stamp:#FF8A70}
+:root[data-theme="mono"]{color-scheme:light; --paper:#FFFFFF; --grid:#E6E6E6; --ink:#111111; --muted:#555555; --moss:#111111; --on-moss:#fff; --line:rgba(0,0,0,.35); --stamp:#C0210B}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
@@ -45,7 +50,7 @@ a:hover{background:var(--yellow); color:var(--note-ink)}
 .skip:focus{left:.5rem; top:.5rem}
 
 /* Kepala dan navigasi */
-.top{max-width:68rem; margin:0 auto; padding:1.1rem 1rem .5rem}
+.top{max-width:68rem; margin:0 auto; padding:1.1rem 1rem .5rem; display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; position:relative}
 .brand{font-family:var(--sans); font-weight:800; font-size:1.7rem; letter-spacing:-.02em; text-decoration:none; line-height:1.1}
 .brand:hover{background:none}
 .tag{margin:.15rem 0 0; color:var(--muted); font-style:italic; font-size:1rem; line-height:1.4}
@@ -141,6 +146,18 @@ dialog::backdrop{background:rgba(10,16,12,.8)}
 .cover img{display:block; width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:3px 7px 7px 3px; box-shadow:0 1px 0 rgba(0,0,0,.2),3px 5px 9px -4px rgba(0,0,0,.6)}
 .cover:focus-visible{outline:3px solid var(--moss); outline-offset:3px}
 .count{text-align:center}
+.themebtn{flex:none; margin-top:.25rem; padding:.3rem .9rem}
+.themes{position:absolute; right:1rem; top:calc(100% - .2rem); z-index:30; background:var(--paper); border:2px solid var(--ink); border-radius:12px 4px 12px 12px; padding:.4rem; min-width:11.5rem; box-shadow:0 14px 24px -12px rgba(0,0,0,.55)}
+.theme-opt{display:flex; align-items:center; gap:.7rem; width:100%; padding:.45rem .6rem; border:0; border-radius:8px; background:none; color:var(--ink); cursor:pointer; text-align:left; font-family:var(--sans); font-weight:700; font-size:.98rem}
+.theme-opt:hover{background:var(--yellow); color:var(--note-ink)}
+.theme-opt[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+.sw{flex:none; width:1.35rem; height:1.35rem; border-radius:50%; border:2px solid currentColor}
+.mw{position:relative; display:block}
+.vbadge{position:absolute; inset:0; margin:auto; width:3.2rem; height:3.2rem; border-radius:50%; background:rgba(255,216,77,.95); pointer-events:none}
+.vbadge::after{content:""; position:absolute; left:1.25rem; top:.9rem; border-left:1.1rem solid #1D2B23; border-top:.7rem solid transparent; border-bottom:.7rem solid transparent}
+.vid{display:block; width:100%; aspect-ratio:16/9; margin-top:.8rem; background:#000; border:2px solid var(--ink); border-radius:10px}
+.lead{white-space:pre-line}
+.lb video{display:block; width:100%; max-height:70vh; background:#000}
 .portrait{float:right; width:9.5rem; margin:.3rem 0 1rem 1.2rem; padding:.5rem .5rem 1.6rem; background:#FBFBF6; box-shadow:0 1px 0 rgba(0,0,0,.15),0 12px 18px -12px rgba(0,0,0,.6); transform:rotate(2deg)}
 .portrait img{display:block; width:100%; aspect-ratio:1; object-fit:cover}
 .ab p{white-space:pre-line}
@@ -170,8 +187,10 @@ footer:not(:has(> :not([hidden]))){display:none}
 <body>
 <a class="skip" href="#main">Langsung ke isi</a>
 <header class="top">
-  <a class="brand" href="#/home" id="brand">Peta Kenangan</a>
-  <p class="tag" id="tagline"></p>
+  <div><a class="brand" href="#/home" id="brand">Peta Kenangan</a>
+  <p class="tag" id="tagline"></p></div>
+  <button class="btn themebtn" id="themebtn" aria-expanded="false" aria-controls="themes">Tema</button>
+  <div class="themes" id="themes" role="group" aria-label="Pilih tema" hidden></div>
 </header>
 <nav class="nav" aria-label="Menu utama"><ul id="menu"></ul></nav>
 <main id="main" tabindex="-1"></main>
@@ -186,11 +205,12 @@ footer:not(:has(> :not([hidden]))){display:none}
    ISI TETAP. Hanya nama situs, tagline, dan sapaan beranda yang diubah di sini.
    About Me, Resume, artikel, catatan, foto, media, dan buku ada di folder data/.
    ===================================================================== */
-const SITE = {
-  first: "Galih",
+let SITE = {
   name: "Peta Kenangan",
   tagline: "Catatan, gagasan, dan portofolio, semuanya numpang di satu rumah.",
-  intro: "Selamat datang di buku catatan saya. Isinya campur aduk: tulisan serius soal hukum dan hutan, pikiran yang lewat begitu saja, dan sesekali kelakuan lucu di rumah. Silakan duduk, ambil minum, baca mana yang menarik."
+  heading: "Halo, saya Galih.",
+  intro: "Selamat datang di buku catatan saya. Isinya campur aduk: tulisan serius soal hukum dan hutan, pikiran yang lewat begitu saja, dan sesekali kelakuan lucu di rumah. Silakan duduk, ambil minum, baca mana yang menarik.",
+  defaultTheme: "auto"
 };
 
 /* Artikel, catatan, foto, media, dan daftar bacaan kini dimuat dari folder data/
@@ -198,7 +218,8 @@ const SITE = {
    Isi lewat Pages CMS, atau edit file-file itu langsung. */
 let POSTS = [], NOTES = [], GALLERY = [], MEDIA = [], BOOKS = [];
 
-/* About Me dan Resume juga dimuat dari data/about.json dan data/resume.json. */
+/* Nama situs, tagline, dan sapaan beranda dimuat dari data/site.json (nilai di atas dipakai bila file itu kosong).
+   About Me dan Resume juga dimuat dari data/about.json dan data/resume.json. */
 let ABOUT = { photo:"", paras:[], facts:[] };
 let RESUME = { edu:[], work:[], exp:[], skills:[] };
 
@@ -212,7 +233,11 @@ const ROT = [-1.8,1.4,-.8,2,-1.3,.9];
 const byDate = (a,b) => b.date.localeCompare(a.date);
 const slugify = s => String(s || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "tulisan";
 const asset = s => /^(https?:)?\/\//.test(s) ? s : String(s).replace(/^\/+/, "");
-const imgSrc = g => g.url || (g.image ? asset(g.image) : "");
+const VID = /\.(mp4|webm|mov|m4v|ogv)(\?|#|$)/i;
+const imgSrc = g => (g.url && !VID.test(g.url)) ? g.url : (g.image ? asset(g.image) : "");
+const galVideo = g => g.video || (VID.test(g.url || "") ? g.url : "");
+const ytId = s => { s = String(s || "").trim(); const m = s.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : (/^[\w-]{11}$/.test(s) ? s : ""); };
+const mediaVideo = m => m.video || (m.youtube && !ytId(m.youtube) && /^https?:\/\//i.test(m.youtube) ? m.youtube : "");
 
 async function loadData() {
   const get = async n => {
@@ -222,7 +247,8 @@ async function loadData() {
   [POSTS, NOTES, GALLERY, MEDIA, BOOKS] = await Promise.all(["posts","notes","gallery","media","books"].map(get));
   const getObj = async n => { try { const r = await fetch(`data/${n}.json`, { cache: "no-cache" }); if (!r.ok) throw new Error(); return await r.json(); } catch { return {}; } };
   const arr = x => Array.isArray(x) ? x : [];
-  const [ab, rs] = await Promise.all([getObj("about"), getObj("resume")]);
+  const [ab, rs, st] = await Promise.all([getObj("about"), getObj("resume"), getObj("site")]);
+  SITE = { ...SITE, ...Object.fromEntries(Object.entries(st).filter(([, v]) => v)) };
   ABOUT = { photo: ab.photo || "", paras: arr(ab.paras).filter(Boolean), facts: arr(ab.facts).filter(f => f && f.label) };
   RESUME = { edu: arr(rs.edu), work: arr(rs.work), exp: arr(rs.exp), skills: arr(rs.skills).filter(Boolean) };
   POSTS = POSTS.filter(p => p.title && p.body).map(p => ({ ...p, slug: p.slug || slugify(p.title), tags: p.tags || [], date: p.date || "2000-01-01" }));
@@ -275,20 +301,21 @@ resetShown();
 
 const BOOK_STAMP = { reading:"Lagi dibaca", done:"Tamat", want:"Antre" };
 
-const shotHTML = (g, i) => `
-  <button class="polaroid" data-shot="${i}" style="--r:${ROT[(i+2) % 6]}deg" aria-label="Perbesar: ${esc(g.caption)}">
-    ${imgSrc(g) ? `<img class="ph" src="${esc(imgSrc(g))}" alt="${esc(g.caption)}" loading="lazy" decoding="async">` : `<span class="ph">foto menyusul</span>`}
+const shotHTML = (g, i) => { const v = galVideo(g), im = imgSrc(g); return `
+  <button class="polaroid" data-shot="${i}" style="--r:${ROT[(i+2) % 6]}deg" aria-label="${v ? "Putar video" : "Perbesar"}: ${esc(g.caption)}">
+    <span class="mw">${im ? `<img class="ph" src="${esc(im)}" alt="${esc(g.caption)}" loading="lazy" decoding="async">` : v ? `<video class="ph" src="${esc(v)}#t=0.1" preload="metadata" muted playsinline></video>` : `<span class="ph">foto menyusul</span>`}${v ? `<i class="vbadge" aria-hidden="true"></i>` : ""}</span>
     <span class="cap" style="display:block">${esc(g.caption)}</span>
-  </button>`;
+  </button>`; };
 
-const mediaHTML = m => `
+const mediaHTML = m => { const id = ytId(m.youtube), v = id ? "" : mediaVideo(m); return `
   <section class="media-item">
     <p class="meta" style="margin:0">${esc(m.type)}</p>
     <h2>${esc(m.title)}</h2>
     <p style="margin:.3rem 0 0">${esc(m.desc)}</p>
-    ${m.youtube ? `<div class="player"><button class="play" data-yt="${esc(m.youtube)}" data-t="${esc(m.title)}" aria-label="Putar video: ${esc(m.title)}"></button></div>` : ""}
+    ${id ? `<div class="player"><button class="play" data-yt="${esc(id)}" data-t="${esc(m.title)}" aria-label="Putar video: ${esc(m.title)}"></button></div>` : ""}
+    ${v ? `<video class="vid" controls preload="metadata" playsinline src="${esc(v)}"></video><p class="meta">Kalau video tidak terputar, <a href="${esc(v)}" target="_blank" rel="noopener">buka langsung di tab baru</a>.</p>` : ""}
     ${m.link ? `<p style="margin-top:.8rem"><a class="btn" href="${esc(m.link)}" target="_blank" rel="noopener">Buka</a></p>` : ""}
-  </section>`;
+  </section>`; };
 
 const bookHTML = b => `
   <div class="book">
@@ -318,7 +345,7 @@ const listBlock = (k, cls) => `<div id="${LISTS[k].el}"${cls ? ` class="${cls}"`
 
 const pages = {
   home: () => ({ title:"Home", html:`
-    <h1>Halo, saya ${esc(SITE.first)}.</h1>
+    <h1>${esc(SITE.heading)}</h1>
     <p class="lead">${esc(SITE.intro)}</p>
     ${NOTES[0] ? `<h2 style="margin-top:2rem">Catatan hari ini</h2>${noteHTML(NOTES[0],0,true)}` : ""}
     <h2>Tulisan terbaru</h2>
@@ -391,8 +418,43 @@ const pages = {
 };
 
 /* Navigasi dan router */
-$("#tagline").textContent = SITE.tagline;
-$("#brand").textContent = SITE.name;
+const applySite = () => { $("#tagline").textContent = SITE.tagline; $("#brand").textContent = SITE.name; };
+applySite();
+
+/* Tema */
+const THEMES = [
+  ["auto","Otomatis","linear-gradient(90deg,#EAF0E4 50%,#141C17 50%)"],
+  ["kertas","Kertas","#EAF0E4"], ["hutan","Hutan","#141C17"],
+  ["laut","Laut","#E6F0F7"], ["senja","Senja","#1E1A2B"], ["mono","Mono","#FFFFFF"]
+];
+const store = { get: k => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
+const currentTheme = () => document.documentElement.dataset.theme || "auto";
+function syncMeta() {
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.remove());
+  const m = document.createElement("meta"); m.name = "theme-color";
+  m.content = getComputedStyle(document.documentElement).getPropertyValue("--paper").trim() || "#EAF0E4";
+  document.head.appendChild(m);
+}
+function setTheme(t, save) {
+  if (!THEMES.some(x => x[0] === t)) t = "auto";
+  if (t === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
+  if (save) store.set("theme", t);
+  document.querySelectorAll("[data-theme-pick]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.themePick === t)));
+  syncMeta();
+}
+function initTheme() {
+  $("#themes").innerHTML = THEMES.map(([k, l, bg]) => `<button class="theme-opt" data-theme-pick="${k}" aria-pressed="false"><span class="sw" style="background:${bg}"></span>${l}</button>`).join("");
+  setTheme(store.get("theme") || SITE.defaultTheme || "auto", false);
+}
+const togglePanel = open => { $("#themes").hidden = !open; $("#themebtn").setAttribute("aria-expanded", String(open)); };
+document.addEventListener("click", e => {
+  const pick = e.target.closest("[data-theme-pick]");
+  if (pick) { setTheme(pick.dataset.themePick, true); return; }
+  if (e.target.closest("#themebtn")) { togglePanel($("#themes").hidden); return; }
+  if (!e.target.closest("#themes")) togglePanel(false);
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") togglePanel(false); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", syncMeta);
 $("#menu").innerHTML = NAV.map(([k,l]) => `<li><a href="#/${k}" data-nav="${k}">${l}</a></li>`).join("");
 
 function render() {
@@ -415,7 +477,7 @@ function render() {
 }
 addEventListener("hashchange", render);
 $("#main").innerHTML = "<p>Memuat...</p>";
-loadData().then(render);
+loadData().then(() => { applySite(); initTheme(); render(); });
 
 /* Interaksi */
 document.addEventListener("click", e => {
@@ -436,7 +498,8 @@ document.addEventListener("click", e => {
     $("#pg-notes").innerHTML = pagerHTML("notes");
   } else if (t.dataset.shot !== undefined) {
     const g = GALLERY[+t.dataset.shot];
-    $("#lbbody").innerHTML = (imgSrc(g) ? `<img class="ph" src="${esc(imgSrc(g))}" alt="${esc(g.caption)}" style="object-fit:contain;aspect-ratio:auto">` : `<span class="ph">foto menyusul</span>`)
+    const gv = galVideo(g);
+    $("#lbbody").innerHTML = (gv ? `<video class="ph" src="${esc(gv)}" controls autoplay playsinline style="aspect-ratio:auto;object-fit:contain"></video>` : imgSrc(g) ? `<img class="ph" src="${esc(imgSrc(g))}" alt="${esc(g.caption)}" style="object-fit:contain;aspect-ratio:auto">` : `<span class="ph">foto menyusul</span>`)
       + `<p>${esc(g.caption)}</p><button class="btn" data-close>Tutup</button>`;
     $("#lb").showModal();
   } else if (t.dataset.book !== undefined) {
@@ -449,6 +512,7 @@ document.addEventListener("click", e => {
     print();
   }
 });
+$("#lb").addEventListener("close", () => { $("#lbbody").innerHTML = ""; });
 $("#lb").addEventListener("click", e => { if (e.target.id === "lb" || e.target.closest("[data-close]")) $("#lb").close(); });
 
 /* PWA */
