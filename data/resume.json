@@ -1,0 +1,41 @@
+{
+  "edu": [
+    {
+      "title": "Sarjana Hukum (S.H.)",
+      "org": "[Nama universitas]",
+      "period": "[Tahun]"
+    },
+    {
+      "title": "Sarjana Kehutanan (S.Hut.)",
+      "org": "[Nama universitas]",
+      "period": "[Tahun]"
+    }
+  ],
+  "work": [
+    {
+      "title": "Polisi Kehutanan (Polhut)",
+      "org": "Kementerian Kehutanan Republik Indonesia",
+      "period": "[Tahun] sampai sekarang",
+      "points": [
+        "Perlindungan dan pengamanan kawasan hutan.",
+        "Tambahkan tugas dan capaian Anda di sini."
+      ]
+    }
+  ],
+  "exp": [
+    {
+      "title": "[Judul pengalaman atau proyek]",
+      "org": "[Instansi atau komunitas]",
+      "period": "[Tahun]",
+      "points": [
+        "Uraikan peran dan hasilnya."
+      ]
+    }
+  ],
+  "skills": [
+    "Penegakan hukum kehutanan",
+    "Analisis peraturan",
+    "Penulisan analitis",
+    "Patroli dan pengamanan kawasan"
+  ]
+}
